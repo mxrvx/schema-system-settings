@@ -1,0 +1,57 @@
+{
+    "name": "mxrvx/schema-system-settings",
+    "type": "library",
+    "license": "MIT",
+    "description": "System Settings Schema Builder for MODX Revolution",
+    "keywords": [
+        "MODX",
+        "Revolution"
+    ],
+    "authors": [
+        {
+            "name": "Vgrish",
+            "email": "vgrish@gmail.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/mxrvx/schema-system-settings/issues",
+        "source": "https://github.com/mxrvx/schema-system-settings",
+        "docs": "https://github.com/mxrvx/schema-system-settings",
+        "chat": "https://t.me/mxrvx_official"
+    },
+    "require": {
+        "php": ">=8.0",
+        "ext-json": "*",
+        "ext-pdo": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "vimeo/psalm": "^5.26.1",
+        "mxrvx/code-style": "^1.0.0",
+        "hjerichen/dbunit": "^0.4.0",
+        "modx/revolution": "v3.0.5-pl"
+    },
+    "autoload": {
+        "psr-4": {
+            "MXRVX\\Schema\\System\\Settings\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MXRVX\\Schema\\System\\Settings\\Tests\\": "tests/Schema/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": false
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev",
+    "scripts": {
+        "cs:diff": "php-cs-fixer fix --dry-run -v --diff",
+        "cs:fix": "php-cs-fixer fix -v",
+        "psalm": "psalm",
+        "psalm:baseline": "psalm --set-baseline=psalm-baseline.xml",
+        "test": "phpunit --color=always"
+    }
+}
