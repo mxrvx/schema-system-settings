@@ -16,6 +16,12 @@ class SchemaTest extends BaseTest
         $this->assertInstanceOf(Schema::class, $this->schema);
     }
 
+    public function testDefineException(): void
+    {
+        $this->expectException(\Exception::class);
+        Schema::define('');
+    }
+
     public function testSettings(): void
     {
         $this->assertInstanceOf(Settings::class, $this->settings);

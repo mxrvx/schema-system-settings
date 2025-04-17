@@ -6,19 +6,17 @@ namespace MXRVX\Schema\System\Settings;
 
 class Schema implements SchemaInterface
 {
-    /** @var non-empty-string */
-    private string $namespace;
-
-    private Settings $settings;
-
     /** @var array<array-key,mixed> */
     private array $config = [];
 
-    private function __construct(string $namespace, Settings $settings)
+    /**
+     * @throws \Exception
+     */
+    private function __construct(private readonly string $namespace, private Settings $settings)
     {
-        \assert(!empty($namespace));
-        $this->namespace = $namespace;
-        $this->settings = $settings;
+        if (empty($namespace)) {
+            throw new \Exception('`namespace` is required.');
+        }
     }
 
     public static function define(string $namespace): Schema
