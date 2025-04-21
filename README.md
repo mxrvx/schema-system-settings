@@ -30,42 +30,42 @@ $schema = Settings\Schema::define('app-namespace')
                 value: 1,
                 xtype: 'combo-boolean',
                 area: 'system',
-                typecast: [TypeCaster::BOOLEAN],
+                typecast: TypeCaster::BOOLEAN,
             ),
             Settings\Setting::define(
                 key: 'key2',
                 value: 'string',
                 xtype: 'textfield',
                 area: 'system',
-                typecast: [TypeCaster::STRING],
+                typecast: TypeCaster::STRING,
             ),
             Settings\Setting::define(
                 key: 'key3',
                 value: '312341241234',
                 xtype: 'textfield',
                 area: 'system',
-                typecast: [TypeCaster::INTEGER],
+                typecast: TypeCaster::INTEGER,
             ),
             Settings\Setting::define(
                 key: 'key4',
                 value: ['services' => ['github', 'bitbucket', 'google']],
                 xtype: 'textfield',
                 area: 'services',
-                typecast: [TypeCaster::ARRAY],
+                typecast: TypeCaster::ARRAY,
             ),
             Settings\Setting::define(
                 key: 'key5',
                 value: ['services' => ['github', 'bitbucket', 'google']],
                 xtype: 'textfield',
                 area: 'services',
-                typecast: [TypeCaster::JSON],
+                typecast: TypeCaster::JSON,
             ),
             Settings\Setting::define(
                 key: 'key6',
                 value: '1,2,3',
                 xtype: 'textfield',
                 area: 'services',
-                typecast: [TypeCaster::LIST_INTEGER],
+                typecast: [TypeCaster::STRING, TypeCaster::LIST_INTEGER],
             ),
         ]
     );
@@ -100,10 +100,7 @@ array (
     'value' => true,
     'xtype' => 'combo-boolean',
     'area' => 'system',
-    'typecast' => 
-    array (
-      0 => 'MXRVX\\Schema\\System\\Settings\\TypeCasters\\BooleanCaster',
-    ),
+    'typecast' => 'MXRVX\\Schema\\System\\Settings\\TypeCasters\\BooleanCaster',
   ),
   'key2' => 
   array (
@@ -111,10 +108,7 @@ array (
     'value' => 'string',
     'xtype' => 'textfield',
     'area' => 'system',
-    'typecast' => 
-    array (
-      0 => 'MXRVX\\Schema\\System\\Settings\\TypeCasters\\StringCaster',
-    ),
+    'typecast' => 'MXRVX\\Schema\\System\\Settings\\TypeCasters\\StringCaster',
   ),
   'key3' => 
   array (
@@ -122,10 +116,7 @@ array (
     'value' => 312341241234,
     'xtype' => 'textfield',
     'area' => 'system',
-    'typecast' => 
-    array (
-      0 => 'MXRVX\\Schema\\System\\Settings\\TypeCasters\\IntegerCaster',
-    ),
+    'typecast' => 'MXRVX\\Schema\\System\\Settings\\TypeCasters\\IntegerCaster',
   ),
   'key4' => 
   array (
@@ -141,10 +132,7 @@ array (
     ),
     'xtype' => 'textfield',
     'area' => 'services',
-    'typecast' => 
-    array (
-      0 => 'MXRVX\\Schema\\System\\Settings\\TypeCasters\\ArrayCaster',
-    ),
+    'typecast' => 'MXRVX\\Schema\\System\\Settings\\TypeCasters\\ArrayCaster',
   ),
   'key5' => 
   array (
@@ -152,10 +140,7 @@ array (
     'value' => '{"services":["github","bitbucket","google"]}',
     'xtype' => 'textfield',
     'area' => 'services',
-    'typecast' => 
-    array (
-      0 => 'MXRVX\\Schema\\System\\Settings\\TypeCasters\\JsonCaster',
-    ),
+    'typecast' => 'MXRVX\\Schema\\System\\Settings\\TypeCasters\\JsonCaster',
   ),
   'key6' => 
   array (
@@ -170,11 +155,11 @@ array (
     'area' => 'services',
     'typecast' => 
     array (
-      0 => 'MXRVX\\Schema\\System\\Settings\\TypeCasters\\ListIntegerCaster',
+      0 => 'MXRVX\\Schema\\System\\Settings\\TypeCasters\\StringCaster',
+      1 => 'MXRVX\\Schema\\System\\Settings\\TypeCasters\\ListIntegerCaster',
     ),
   ),
 )
-
 
 ```
 

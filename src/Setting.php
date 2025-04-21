@@ -12,14 +12,14 @@ final class Setting
         private mixed &$value,
         private readonly string $xtype,
         private readonly string $area,
-        private readonly ?array $typecast,
+        private readonly null|string|array $typecast,
     ) {}
 
     /**
      *
      * @return static
      */
-    public static function define(string $key, mixed $value, string $xtype, string $area = '', ?array $typecast = null): self
+    public static function define(string $key, mixed $value, string $xtype, string $area = '', null|string|array $typecast = null): self
     {
         \assert(!empty($key));
         \assert(!empty($xtype));
@@ -28,15 +28,22 @@ final class Setting
 
     /**
      *
-     * @return TypeCasterInterface::class[]
+     * @return array<class-string<TypeCasterInterface>>
      */
-    public function getTypeCasters(?array $typecast = null): array
+    public function getTypeCasters(null|string|array $typecast = null): array
     {
-        if ($casters = $typecast ?? $this->typecast) {
-            $casters = \array_filter($casters, static fn($class): bool => \is_string($class) && \is_a($class, TypeCasterInterface::class, true));
-        }
+        $typecast = $typecast ?? $this->typecast;
 
-        return $casters ?? [];
+        $casters = match (true) {
+            \is_string($typecast) => [$typecast],
+            \is_array($typecast) => $typecast,
+            default => [],
+        };
+
+        return \array_filter(
+            $casters,
+            static fn($class): bool => \is_string($class) && \class_exists($class) && \is_a($class, TypeCasterInterface::class, true),
+        );
     }
 
     public function getKey(?string $namespace = null): string

@@ -5,10 +5,48 @@ declare(strict_types=1);
 namespace MXRVX\Schema\System\Settings\Tests;
 
 use MXRVX\Schema\System\Settings\Setting;
+use MXRVX\Schema\System\Settings\TypeCaster;
+use MXRVX\Schema\System\Settings\TypeCasters\ArrayCaster;
 
 /** @covers \MXRVX\Schema\System\Settings\Schema */
 class SettingsTest extends BaseTest
 {
+    public function testDefine(): void
+    {
+        $setting = Setting::define('key1', '', '', '');
+        $this->assertSame(Setting::class, $setting::class);
+    }
+
+    public function testDefineKey(): void
+    {
+        $setting = Setting::define('key1', '', '', '');
+        $this->assertSame('key1', $setting->getKey());
+    }
+
+    public function testDefineTypecast(): void
+    {
+        $setting = Setting::define('key1', '', '', '', null);
+        $this->assertSame([], $setting->getTypeCasters());
+
+        $setting = Setting::define('key1', '', '', '', []);
+        $this->assertSame([], $setting->getTypeCasters());
+
+        $setting = Setting::define('key1', '', '', '', ['not_exist']);
+        $this->assertSame([], $setting->getTypeCasters());
+
+        $setting = Setting::define('key1', '', '', '', TypeCaster::BOOLEAN);
+        $this->assertSame([TypeCaster::BOOLEAN], $setting->getTypeCasters());
+
+        $setting = Setting::define('key1', '', '', '', [TypeCaster::BOOLEAN]);
+        $this->assertSame([TypeCaster::BOOLEAN], $setting->getTypeCasters());
+
+        $setting = Setting::define('key1', '', '', '', [TypeCaster::BOOLEAN,TypeCaster::INTEGER]);
+        $this->assertSame([TypeCaster::BOOLEAN,TypeCaster::INTEGER], $setting->getTypeCasters());
+
+        $setting = Setting::define('key1', '', '', '', [ArrayCaster::class]);
+        $this->assertSame([ArrayCaster::class], $setting->getTypeCasters());
+    }
+
     public function testCount(): void
     {
         $this->settings->set('key1', Setting::define('key1', '', '', ''));
