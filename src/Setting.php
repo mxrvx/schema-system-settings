@@ -91,6 +91,7 @@ final class Setting
             'key' => $this->getKey($namespace),
             'value' => $processValue ? $this->getValue() : $this->value,
             'xtype' => $this->xtype,
+            'namespace' => $namespace ?: '',
             'area' => $this->area,
             'typecast' => $this->typecast,
         ];
