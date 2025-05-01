@@ -89,12 +89,12 @@ final class Setting
     {
         return [
             'key' => $this->getKey($namespace),
-            'value' => $processValue ? $this->getValue() : $this->value,
+            'value' => $this->value,
             'xtype' => $this->xtype,
-            'namespace' => $namespace ?? '',
             'area' => $this->area,
             'typecast' => $this->typecast,
-        ];
+        ] + ($processValue ? ['value' => $this->getValue()] : [])
+        + ($namespace ? ['namespace' => $namespace] : []);
     }
 
     /**
