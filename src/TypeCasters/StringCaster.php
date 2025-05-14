@@ -15,7 +15,7 @@ class StringCaster extends TypeCaster
         $value = match (\gettype($value)) {
             'boolean' => $value ? '1' : '0',
             'integer', 'double' => (string) $value,
-            'array' => !empty($value) ? \json_encode($value, \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES) : null,
+            'array' => self::arrayToString($value),
             'string' => \trim($value),
             default => null,
         };
@@ -33,4 +33,33 @@ class StringCaster extends TypeCaster
             [StringCaster::class, 'transform'],
         ];
     }
+
+    public static function arrayToString(array $array): ?string
+    {
+        try {
+            $json = \json_encode($array, JSON_THROW_ON_ERROR);
+            /** @var array|null $array */
+            $array = \json_decode($json, true);
+            if (\json_last_error() !== JSON_ERROR_NONE) {
+                $array = [];
+            }
+        } catch (\JsonException $e) {
+            return null;
+        }
+
+        if (empty($array)) {
+            return null;
+        }
+
+        if (\array_keys($array) === \range(0, \count($array) - 1)) {
+            $count = \count($array);
+            $array = \array_filter($array, static fn($v) => \is_scalar($v) || \is_null($v));
+            if (\count($array) === $count) {
+                return \implode(',', $array);
+            }
+        }
+
+        return \json_encode($array, \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES);
+    }
+
 }

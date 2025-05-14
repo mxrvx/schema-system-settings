@@ -23,6 +23,9 @@ class StringCasterTest extends BaseTest
             [1.11, '1.11'],
             ['1.11', '1.11'],
             ['-11.11', '-11.11'],
+            [['id','title'], 'id,title'],
+            [[1,2,3], '1,2,3'],
+            [['id' => 1,'title' => 'test'], '{"id":1,"title":"test"}'],
         ];
     }
 

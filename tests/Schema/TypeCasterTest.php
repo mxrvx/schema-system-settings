@@ -25,7 +25,7 @@ class TypeCasterTest extends BaseTest
                 [-0.111, '-0.111'],
                 [true, '1'],
                 [false, '0'],
-                [[2, 3, 4], '[2,3,4]'],
+                [[2, 3, 4], '2,3,4'],
             ] as $iteration
         ) {
             $value = $iteration[0];
