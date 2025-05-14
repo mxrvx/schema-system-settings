@@ -17,6 +17,7 @@ class ArrayCasterTest extends BaseTest
             [['1', 2, '3', null], ['1', 2, '3', null]],
             [\json_encode([1, 2, 3]), [1, 2, 3]],
             [\json_encode(["ssds", "3232", "ывавыаыв"]), ["ssds", "3232", "ывавыаыв"]],
+            ['1,2,55', [1,2,55]],
         ];
     }
 

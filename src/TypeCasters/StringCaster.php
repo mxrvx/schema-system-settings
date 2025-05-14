@@ -34,31 +34,31 @@ class StringCaster extends TypeCaster
         ];
     }
 
-    public static function arrayToString(array $array): ?string
+    public static function arrayToString(array $value): ?string
     {
         try {
-            $json = \json_encode($array, JSON_THROW_ON_ERROR);
-            /** @var array|null $array */
-            $array = \json_decode($json, true);
+            $string = \json_encode($value, JSON_THROW_ON_ERROR);
+            /** @var array|null $value */
+            $value = \json_decode($string, true);
             if (\json_last_error() !== JSON_ERROR_NONE) {
-                $array = [];
+                $value = [];
             }
         } catch (\JsonException $e) {
             return null;
         }
 
-        if (empty($array)) {
+        if (empty($value)) {
             return null;
         }
 
-        if (\array_keys($array) === \range(0, \count($array) - 1)) {
-            $count = \count($array);
-            $tmp = \array_filter($array, static fn($v) => \is_scalar($v) || \is_null($v));
+        if (\array_keys($value) === \range(0, \count($value) - 1)) {
+            $count = \count($value);
+            $tmp = \array_filter($value, static fn($v) => \is_scalar($v) || \is_null($v));
             if (\count($tmp) === $count) {
                 return \implode(',', $tmp);
             }
         }
 
-        return \json_encode($array, \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES);
+        return \json_encode($value, \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES);
     }
 }

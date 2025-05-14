@@ -13,7 +13,7 @@ class ArrayCaster extends TypeCaster
         }
 
         $value = match (\gettype($value)) {
-            'string' => (!empty($value) && ($value[0] === '[' || $value[0] === '{')) ? (array) \json_decode($value, true) : [],
+            'string' => self::stringToArray($value),
             'array' => $value,
             default => null,
         };
@@ -30,5 +30,25 @@ class ArrayCaster extends TypeCaster
         return [
             [ArrayCaster::class, 'transform'],
         ];
+    }
+
+    public static function stringToArray(string $value): ?array
+    {
+        if (empty($value)) {
+            return null;
+        }
+
+        if (($value[0] === '[' || $value[0] === '{')) {
+            /** @var array|null $array */
+            $array = \json_decode($value, true);
+            if (\json_last_error() !== JSON_ERROR_NONE) {
+                $array = [];
+            }
+        } else {
+            $array = \explode(',', $value);
+            $array = \array_filter($array, static fn($v) => \is_scalar($v));
+        }
+
+        return $array;
     }
 }
