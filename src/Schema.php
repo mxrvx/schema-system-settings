@@ -87,11 +87,11 @@ class Schema implements SchemaInterface
         return $this->settings;
     }
 
-    public function getSettingsArray(bool $processValue = false): array
+    public function getSettingsArray(): array
     {
         $array = [];
         foreach ($this->settings as $key => $setting) {
-            $array[$key] = $setting->toArray($this->namespace, $processValue);
+            $array[$key] = $setting->toArray($this->namespace, true, true);
         }
         return $array;
     }

@@ -14,7 +14,7 @@ interface SchemaConfigInterface
 
     public function getSetting(string $key): ?Setting;
 
-    public function getSettingsArray(bool $processValue = false): array;
+    public function getSettingsArray(): array;
 
     public function setSettingValue(string $key, mixed $value): void;
 }

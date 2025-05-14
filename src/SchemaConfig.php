@@ -39,9 +39,9 @@ class SchemaConfig implements SchemaConfigInterface
         return $this->schema->getSettings();
     }
 
-    public function getSettingsArray(bool $processValue = false): array
+    public function getSettingsArray(): array
     {
-        return $this->schema->getSettingsArray($processValue);
+        return $this->schema->getSettingsArray();
     }
 
     public function getSetting(string $key): ?Setting

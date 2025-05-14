@@ -53,13 +53,12 @@ class StringCaster extends TypeCaster
 
         if (\array_keys($array) === \range(0, \count($array) - 1)) {
             $count = \count($array);
-            $array = \array_filter($array, static fn($v) => \is_scalar($v) || \is_null($v));
-            if (\count($array) === $count) {
-                return \implode(',', $array);
+            $tmp = \array_filter($array, static fn($v) => \is_scalar($v) || \is_null($v));
+            if (\count($tmp) === $count) {
+                return \implode(',', $tmp);
             }
         }
 
         return \json_encode($array, \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES);
     }
-
 }

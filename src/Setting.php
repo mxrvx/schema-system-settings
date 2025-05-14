@@ -85,16 +85,19 @@ final class Setting
         return $value;
     }
 
-    public function toArray(?string $namespace = null, bool $processValue = false): array
+    public function toArray(?string $namespace = null, bool $processValue = false, bool $initialValue = false): array
     {
         return [
             'key' => $this->getKey($namespace),
-            'value' => $processValue ? $this->getValue() : $this->value,
+            'value' => $processValue && $initialValue ?
+                $this->getValue($this->initial, true, [TypeCaster::STRING]) : (
+                    $processValue ? $this->getValue() : $this->value
+                ),
             'xtype' => $this->xtype,
             'area' => $this->area,
             'typecast' => $this->typecast,
         ]
-        + ($namespace ? ['namespace' => $namespace] : []);
+            + ($namespace ? ['namespace' => $namespace] : []);
     }
 
     /**
