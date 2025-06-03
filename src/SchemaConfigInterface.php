@@ -17,4 +17,6 @@ interface SchemaConfigInterface
     public function getSettingsArray(): array;
 
     public function setSettingValue(string $key, mixed $value): void;
+
+    public function getSettingValue(string $key, mixed $default = null, bool $skipEmpty = true, ?array $typecaster = null): mixed;
 }
