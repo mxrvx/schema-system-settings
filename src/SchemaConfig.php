@@ -39,6 +39,11 @@ class SchemaConfig implements SchemaConfigInterface
         return $this->schema->getSettings();
     }
 
+    public function getSettingsByArea(string $area): array
+    {
+        return $this->schema->getSettingsByArea($area);
+    }
+
     public function getSettingsArray(): array
     {
         return $this->schema->getSettingsArray();

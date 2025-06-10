@@ -11,6 +11,11 @@ interface SchemaInterface
     public function getSettings(): Settings;
 
     /**
+     * @return Setting[]
+     */
+    public function getSettingsByArea(string $area): array;
+
+    /**
      * Get settings array
      *
      * @return array<array-key,array<array-key,mixed>>

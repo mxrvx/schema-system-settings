@@ -87,6 +87,21 @@ class Schema implements SchemaInterface
         return $this->settings;
     }
 
+    /**
+     * @return Setting[]
+     */
+    public function getSettingsByArea(string $area): array
+    {
+        $array = [];
+        foreach ($this->settings as $setting) {
+            if ($setting->getArea() === $area) {
+                $array[] = $setting;
+            }
+        }
+
+        return $array;
+    }
+
     public function getSettingsArray(): array
     {
         $array = [];
