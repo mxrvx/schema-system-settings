@@ -100,6 +100,16 @@ final class Setting
             + ($namespace ? ['namespace' => $namespace] : []);
     }
 
+    public function getXtype(): string
+    {
+        return $this->xtype;
+    }
+
+    public function getArea(): string
+    {
+        return $this->area;
+    }
+
     /**
      * @param  array<class-string<TypeCasterInterface>>  $casters
      *
