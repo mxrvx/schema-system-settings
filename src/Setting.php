@@ -6,6 +6,8 @@ namespace MXRVX\Schema\System\Settings;
 
 final class Setting
 {
+    use SettingTrait;
+
     private function __construct(
         private readonly string $key,
         private readonly mixed $initial,

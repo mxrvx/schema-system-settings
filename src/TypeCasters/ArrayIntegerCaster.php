@@ -19,7 +19,7 @@ class ArrayIntegerCaster extends TypeCaster
             return null;
         }
 
-        return $value;
+        return \array_values($value);
     }
 
     public static function getTransformers(): array

@@ -17,6 +17,14 @@ abstract class TypeCaster implements TypeCasterInterface
         };
     }
 
+    public static function prepare(mixed $value): mixed
+    {
+        return match (\gettype($value)) {
+            'string' => \trim($value),
+            default => $value,
+        };
+    }
+
     public static function cast(mixed $value, bool $skipEmpty = true): mixed
     {
         if (!self::isAllowed($value)) {
@@ -24,6 +32,8 @@ abstract class TypeCaster implements TypeCasterInterface
         }
 
         try {
+            /** @var mixed $value */
+            $value = self::prepare($value);
             /** @var callable[] $rules */
             foreach (static::getTransformers() as $rule) {
                 if (\is_callable($rule, true)) {

@@ -14,9 +14,12 @@ class ListStringCaster extends TypeCaster
 
         if (\is_array($value)) {
             $value = \array_map(static function ($value) {
+                if (\is_bool($value)) {
+                    return $value ? '1' : '0';
+                }
                 return \is_scalar($value) ? \trim((string) $value) : null;
             }, $value);
-            $value = \array_filter($value);
+            $value =  \array_filter($value, static fn($value) => $value !== '');
             $value = \array_values(\array_unique($value, SORT_REGULAR));
         }
 

@@ -59,6 +59,7 @@ class StringCaster extends TypeCaster
             }
         }
 
-        return \json_encode($value, \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES);
+        $value = \json_encode($value, \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES);
+        return \is_string($value) ? $value : null;
     }
 }

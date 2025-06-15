@@ -23,14 +23,14 @@ class ListCaster extends TypeCaster
             $value = \array_map(static function ($value) {
                 return \is_string($value) ? \trim($value) : $value;
             }, $value);
-            $value =  \array_filter($value);
+            $value =  \array_filter($value, static fn($value) => $value !== '');
         }
 
         if ($skipEmpty && ($value === null || $value === [])) {
             return null;
         }
 
-        return \is_array($value) ? $value : null;
+        return \is_array($value) ? \array_values($value) : null;
     }
 
     public static function getTransformers(): array
