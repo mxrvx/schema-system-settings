@@ -12,16 +12,16 @@ class Schema implements SchemaInterface
     /**
      * @throws \Exception
      */
-    private function __construct(private readonly string $namespace, private Settings $settings)
+    final private function __construct(private readonly string $namespace, private Settings $settings)
     {
         if (empty($namespace)) {
             throw new \Exception('`namespace` is required.');
         }
     }
 
-    public static function define(string $namespace): Schema
+    public static function define(string $namespace): static
     {
-        return new self($namespace, new Settings());
+        return new static($namespace, new Settings());
     }
 
     /**

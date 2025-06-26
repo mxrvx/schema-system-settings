@@ -6,11 +6,11 @@ namespace MXRVX\Schema\System\Settings;
 
 class SchemaConfig implements SchemaConfigInterface
 {
-    private function __construct(private readonly Schema $schema) {}
+    final private function __construct(private readonly Schema $schema) {}
 
-    public static function define(Schema $schema): SchemaConfig
+    public static function define(Schema $schema): static
     {
-        return new self($schema);
+        return new static($schema);
     }
 
     public function getNamespace(): string
